@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class KafkaReaderMock extends KafkaReader {
     public KafkaReaderMock(String zookeeperConnect, String topic, String groupId, String offsetReset) {
-        super(zookeeperConnect, groupId, topic, offsetReset);
+        super(zookeeperConnect, topic, groupId, offsetReset);
     }
 
     public KafkaReaderMock(Properties props, String topic) {
