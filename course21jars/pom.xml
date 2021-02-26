@@ -8,7 +8,6 @@
     <artifactId>course21-jars</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!-- Add typical dependencies for a web application -->
     <dependencies>
         <dependency>
             <groupId>com.alibaba.ververica</groupId>
@@ -43,43 +42,33 @@
         </dependency>
     </dependencies>
 
-
     <build>
         <plugins>
             <plugin>
+                <!-- 使用这个插件非常关键，否则构建出的 fat-jar(或者uber-jar)是不能够被 Flink 加载使用的。 -->
+                <!-- 原因是因为 Flink 使用 SPI 机制，需要用到 META-INF/services 下的插件标识符，-->
+                <!-- 为了避免不同插件冲突，需要使用 ServicesResourceTransformer 进行转化 -->
+                <!-- 详情可以参见 https://ci.apache.org/projects/flink/flink-docs-release-1.12/dev/table/connectors/ -->
+                <!-- 重点是 Transform table connector/format resources 这一小结 -->
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>UTF8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.1</version>
-
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
-
+                <artifactId>maven-shade-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>make-assembly</id>
+                        <id>shade</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>shade</goal>
                         </goals>
+                        <configuration>
+                            <transformers combine.children="append">
+                                <!-- The service transformer is needed to merge META-INF/services files -->
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                            </transformers>
+                        </configuration>
                     </execution>
                 </executions>
-
             </plugin>
         </plugins>
     </build>
-
-
 </project>
