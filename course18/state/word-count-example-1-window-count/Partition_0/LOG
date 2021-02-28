@@ -1,0 +1,181 @@
+2021/02/28-17:31:31.730535 70000c073000 RocksDB version: 5.7.3
+2021/02/28-17:31:31.730619 70000c073000 Git sha rocksdb_build_git_sha:acef93ed65f0cab701565a5d21edc1dea894130c
+2021/02/28-17:31:31.730622 70000c073000 Compile date Sep  1 2017
+2021/02/28-17:31:31.730624 70000c073000 DB SUMMARY
+2021/02/28-17:31:31.730869 70000c073000 SST files in /Users/yuwu/svn/realtime_stream_computing_course/course18/state/word-count-example-1-window-count/Partition_0 dir, Total Num: 0, files: 
+2021/02/28-17:31:31.730875 70000c073000 Write Ahead Log file in /Users/yuwu/svn/realtime_stream_computing_course/course18/state/word-count-example-1-window-count/Partition_0: 
+2021/02/28-17:31:31.731049 70000c073000                         Options.error_if_exists: 0
+2021/02/28-17:31:31.731053 70000c073000                       Options.create_if_missing: 1
+2021/02/28-17:31:31.731054 70000c073000                         Options.paranoid_checks: 1
+2021/02/28-17:31:31.731056 70000c073000                                     Options.env: 0x1251f5480
+2021/02/28-17:31:31.731058 70000c073000                                Options.info_log: 0x7f87a38f6a00
+2021/02/28-17:31:31.731059 70000c073000                Options.max_file_opening_threads: 16
+2021/02/28-17:31:31.731060 70000c073000                               Options.use_fsync: 0
+2021/02/28-17:31:31.731062 70000c073000                       Options.max_log_file_size: 67108864
+2021/02/28-17:31:31.731063 70000c073000                  Options.max_manifest_file_size: 18446744073709551615
+2021/02/28-17:31:31.731065 70000c073000                   Options.log_file_time_to_roll: 0
+2021/02/28-17:31:31.731066 70000c073000                       Options.keep_log_file_num: 2
+2021/02/28-17:31:31.731068 70000c073000                    Options.recycle_log_file_num: 0
+2021/02/28-17:31:31.731069 70000c073000                         Options.allow_fallocate: 1
+2021/02/28-17:31:31.731070 70000c073000                        Options.allow_mmap_reads: 0
+2021/02/28-17:31:31.731072 70000c073000                       Options.allow_mmap_writes: 0
+2021/02/28-17:31:31.731073 70000c073000                        Options.use_direct_reads: 0
+2021/02/28-17:31:31.731074 70000c073000                        Options.use_direct_io_for_flush_and_compaction: 0
+2021/02/28-17:31:31.731076 70000c073000          Options.create_missing_column_families: 0
+2021/02/28-17:31:31.731077 70000c073000                              Options.db_log_dir: 
+2021/02/28-17:31:31.731079 70000c073000                                 Options.wal_dir: /Users/yuwu/svn/realtime_stream_computing_course/course18/state/word-count-example-1-window-count/Partition_0
+2021/02/28-17:31:31.731080 70000c073000                Options.table_cache_numshardbits: 6
+2021/02/28-17:31:31.731082 70000c073000                      Options.max_subcompactions: 1
+2021/02/28-17:31:31.731083 70000c073000                  Options.max_background_flushes: -1
+2021/02/28-17:31:31.731085 70000c073000                         Options.WAL_ttl_seconds: 0
+2021/02/28-17:31:31.731086 70000c073000                       Options.WAL_size_limit_MB: 0
+2021/02/28-17:31:31.731087 70000c073000             Options.manifest_preallocation_size: 4194304
+2021/02/28-17:31:31.731089 70000c073000                     Options.is_fd_close_on_exec: 1
+2021/02/28-17:31:31.731090 70000c073000                   Options.advise_random_on_open: 1
+2021/02/28-17:31:31.731095 70000c073000                    Options.db_write_buffer_size: 0
+2021/02/28-17:31:31.731097 70000c073000         Options.access_hint_on_compaction_start: 1
+2021/02/28-17:31:31.731099 70000c073000  Options.new_table_reader_for_compaction_inputs: 0
+2021/02/28-17:31:31.731100 70000c073000               Options.compaction_readahead_size: 0
+2021/02/28-17:31:31.731101 70000c073000           Options.random_access_max_buffer_size: 1048576
+2021/02/28-17:31:31.731103 70000c073000           Options.writable_file_max_buffer_size: 1048576
+2021/02/28-17:31:31.731104 70000c073000                      Options.use_adaptive_mutex: 0
+2021/02/28-17:31:31.731105 70000c073000                            Options.rate_limiter: 0x0
+2021/02/28-17:31:31.731107 70000c073000     Options.sst_file_manager.rate_bytes_per_sec: 0
+2021/02/28-17:31:31.731108 70000c073000                          Options.bytes_per_sync: 0
+2021/02/28-17:31:31.731109 70000c073000                      Options.wal_bytes_per_sync: 0
+2021/02/28-17:31:31.731111 70000c073000                       Options.wal_recovery_mode: 2
+2021/02/28-17:31:31.731112 70000c073000                  Options.enable_thread_tracking: 0
+2021/02/28-17:31:31.731113 70000c073000                  Options.enable_pipelined_write: 0
+2021/02/28-17:31:31.731114 70000c073000         Options.allow_concurrent_memtable_write: 1
+2021/02/28-17:31:31.731116 70000c073000      Options.enable_write_thread_adaptive_yield: 1
+2021/02/28-17:31:31.731117 70000c073000             Options.write_thread_max_yield_usec: 100
+2021/02/28-17:31:31.731118 70000c073000            Options.write_thread_slow_yield_usec: 3
+2021/02/28-17:31:31.731120 70000c073000                               Options.row_cache: None
+2021/02/28-17:31:31.731121 70000c073000                              Options.wal_filter: None
+2021/02/28-17:31:31.731122 70000c073000             Options.avoid_flush_during_recovery: 0
+2021/02/28-17:31:31.731124 70000c073000             Options.allow_ingest_behind: 0
+2021/02/28-17:31:31.731125 70000c073000             Options.concurrent_prepare: 0
+2021/02/28-17:31:31.731127 70000c073000             Options.manual_wal_flush: 0
+2021/02/28-17:31:31.731128 70000c073000             Options.max_background_jobs: 2
+2021/02/28-17:31:31.731129 70000c073000             Options.max_background_compactions: -1
+2021/02/28-17:31:31.731131 70000c073000             Options.avoid_flush_during_shutdown: 0
+2021/02/28-17:31:31.731132 70000c073000             Options.delayed_write_rate : 16777216
+2021/02/28-17:31:31.731134 70000c073000             Options.max_total_wal_size: 0
+2021/02/28-17:31:31.731135 70000c073000             Options.delete_obsolete_files_period_micros: 21600000000
+2021/02/28-17:31:31.731137 70000c073000                   Options.stats_dump_period_sec: 600
+2021/02/28-17:31:31.731138 70000c073000                          Options.max_open_files: -1
+2021/02/28-17:31:31.731140 70000c073000 Compression algorithms supported:
+2021/02/28-17:31:31.731141 70000c073000 	Snappy supported: 1
+2021/02/28-17:31:31.731142 70000c073000 	Zlib supported: 1
+2021/02/28-17:31:31.731144 70000c073000 	Bzip supported: 1
+2021/02/28-17:31:31.731145 70000c073000 	LZ4 supported: 1
+2021/02/28-17:31:31.731327 70000c073000 	ZSTD supported: 1
+2021/02/28-17:31:31.731473 70000c073000 Fast CRC32 supported: 0
+2021/02/28-17:31:31.732308 70000c073000 [db/db_impl_open.cc:216] Creating manifest 1 
+2021/02/28-17:31:31.735274 70000c073000 [db/version_set.cc:2712] Recovering from manifest file: MANIFEST-000001
+2021/02/28-17:31:31.736081 70000c073000 [db/column_family.cc:413] --------------- Options for column family [default]:
+2021/02/28-17:31:31.736090 70000c073000               Options.comparator: leveldb.BytewiseComparator
+2021/02/28-17:31:31.736093 70000c073000           Options.merge_operator: None
+2021/02/28-17:31:31.736095 70000c073000        Options.compaction_filter: None
+2021/02/28-17:31:31.736096 70000c073000        Options.compaction_filter_factory: None
+2021/02/28-17:31:31.736098 70000c073000         Options.memtable_factory: SkipListFactory
+2021/02/28-17:31:31.736100 70000c073000            Options.table_factory: BlockBasedTable
+2021/02/28-17:31:31.736122 70000c073000            table_factory options:   flush_block_policy_factory: FlushBlockBySizePolicyFactory (0x7f87a39dbfb0)
+  cache_index_and_filter_blocks: 0
+  cache_index_and_filter_blocks_with_high_priority: 0
+  pin_l0_filter_and_index_blocks_in_cache: 0
+  index_type: 0
+  hash_index_allow_collision: 1
+  checksum: 1
+  no_block_cache: 0
+  block_cache: 0x7f87a39dc418
+  block_cache_name: LRUCache
+  block_cache_options:
+    capacity : 104857600
+    num_shard_bits : 6
+    strict_capacity_limit : 0
+    high_pri_pool_ratio: 0.000
+  block_cache_compressed: 0x0
+  persistent_cache: 0x0
+  block_size: 4096
+  block_size_deviation: 10
+  block_restart_interval: 16
+  index_block_restart_interval: 1
+  filter_policy: nullptr
+  whole_key_filtering: 1
+  format_version: 0
+2021/02/28-17:31:31.736125 70000c073000        Options.write_buffer_size: 33554432
+2021/02/28-17:31:31.736126 70000c073000  Options.max_write_buffer_number: 3
+2021/02/28-17:31:31.736252 70000c073000          Options.compression: Snappy
+2021/02/28-17:31:31.736256 70000c073000                  Options.bottommost_compression: Disabled
+2021/02/28-17:31:31.736258 70000c073000       Options.prefix_extractor: nullptr
+2021/02/28-17:31:31.736260 70000c073000   Options.memtable_insert_with_hint_prefix_extractor: nullptr
+2021/02/28-17:31:31.736262 70000c073000             Options.num_levels: 7
+2021/02/28-17:31:31.736263 70000c073000        Options.min_write_buffer_number_to_merge: 1
+2021/02/28-17:31:31.736265 70000c073000     Options.max_write_buffer_number_to_maintain: 0
+2021/02/28-17:31:31.736266 70000c073000            Options.compression_opts.window_bits: -14
+2021/02/28-17:31:31.736267 70000c073000                  Options.compression_opts.level: -1
+2021/02/28-17:31:31.736269 70000c073000               Options.compression_opts.strategy: 0
+2021/02/28-17:31:31.736270 70000c073000         Options.compression_opts.max_dict_bytes: 0
+2021/02/28-17:31:31.736271 70000c073000      Options.level0_file_num_compaction_trigger: 4
+2021/02/28-17:31:31.736273 70000c073000          Options.level0_slowdown_writes_trigger: 20
+2021/02/28-17:31:31.736274 70000c073000              Options.level0_stop_writes_trigger: 36
+2021/02/28-17:31:31.736276 70000c073000                   Options.target_file_size_base: 67108864
+2021/02/28-17:31:31.736277 70000c073000             Options.target_file_size_multiplier: 1
+2021/02/28-17:31:31.736278 70000c073000                Options.max_bytes_for_level_base: 268435456
+2021/02/28-17:31:31.736280 70000c073000 Options.level_compaction_dynamic_level_bytes: 0
+2021/02/28-17:31:31.736282 70000c073000          Options.max_bytes_for_level_multiplier: 10.000000
+2021/02/28-17:31:31.736284 70000c073000 Options.max_bytes_for_level_multiplier_addtl[0]: 1
+2021/02/28-17:31:31.736286 70000c073000 Options.max_bytes_for_level_multiplier_addtl[1]: 1
+2021/02/28-17:31:31.736287 70000c073000 Options.max_bytes_for_level_multiplier_addtl[2]: 1
+2021/02/28-17:31:31.736288 70000c073000 Options.max_bytes_for_level_multiplier_addtl[3]: 1
+2021/02/28-17:31:31.736290 70000c073000 Options.max_bytes_for_level_multiplier_addtl[4]: 1
+2021/02/28-17:31:31.736291 70000c073000 Options.max_bytes_for_level_multiplier_addtl[5]: 1
+2021/02/28-17:31:31.736293 70000c073000 Options.max_bytes_for_level_multiplier_addtl[6]: 1
+2021/02/28-17:31:31.736294 70000c073000       Options.max_sequential_skip_in_iterations: 8
+2021/02/28-17:31:31.736295 70000c073000                    Options.max_compaction_bytes: 1677721600
+2021/02/28-17:31:31.736297 70000c073000                        Options.arena_block_size: 4194304
+2021/02/28-17:31:31.736298 70000c073000   Options.soft_pending_compaction_bytes_limit: 68719476736
+2021/02/28-17:31:31.736300 70000c073000   Options.hard_pending_compaction_bytes_limit: 274877906944
+2021/02/28-17:31:31.736301 70000c073000       Options.rate_limit_delay_max_milliseconds: 100
+2021/02/28-17:31:31.736302 70000c073000                Options.disable_auto_compactions: 0
+2021/02/28-17:31:31.736305 70000c073000                        Options.compaction_style: kCompactionStyleUniversal
+2021/02/28-17:31:31.736311 70000c073000                          Options.compaction_pri: kByCompensatedSize
+2021/02/28-17:31:31.736313 70000c073000 Options.compaction_options_universal.size_ratio: 1
+2021/02/28-17:31:31.736436 70000c073000 Options.compaction_options_universal.min_merge_width: 2
+2021/02/28-17:31:31.736439 70000c073000 Options.compaction_options_universal.max_merge_width: 4294967295
+2021/02/28-17:31:31.736440 70000c073000 Options.compaction_options_universal.max_size_amplification_percent: 200
+2021/02/28-17:31:31.736442 70000c073000 Options.compaction_options_universal.compression_size_percent: -1
+2021/02/28-17:31:31.736443 70000c073000 Options.compaction_options_universal.stop_style: kCompactionStopStyleTotalSize
+2021/02/28-17:31:31.736445 70000c073000 Options.compaction_options_fifo.max_table_files_size: 1073741824
+2021/02/28-17:31:31.736446 70000c073000 Options.compaction_options_fifo.allow_compaction: 0
+2021/02/28-17:31:31.736448 70000c073000 Options.compaction_options_fifo.ttl: 0
+2021/02/28-17:31:31.736449 70000c073000                   Options.table_properties_collectors: 
+2021/02/28-17:31:31.736451 70000c073000                   Options.inplace_update_support: 0
+2021/02/28-17:31:31.736452 70000c073000                 Options.inplace_update_num_locks: 10000
+2021/02/28-17:31:31.736454 70000c073000               Options.memtable_prefix_bloom_size_ratio: 0.000000
+2021/02/28-17:31:31.736456 70000c073000   Options.memtable_huge_page_size: 0
+2021/02/28-17:31:31.736457 70000c073000                           Options.bloom_locality: 0
+2021/02/28-17:31:31.736458 70000c073000                    Options.max_successive_merges: 0
+2021/02/28-17:31:31.736460 70000c073000                Options.optimize_filters_for_hits: 0
+2021/02/28-17:31:31.736461 70000c073000                Options.paranoid_file_checks: 0
+2021/02/28-17:31:31.736463 70000c073000                Options.force_consistency_checks: 0
+2021/02/28-17:31:31.736464 70000c073000                Options.report_bg_io_stats: 0
+2021/02/28-17:31:31.737779 70000c073000 [db/version_set.cc:2969] Recovered from manifest file:/Users/yuwu/svn/realtime_stream_computing_course/course18/state/word-count-example-1-window-count/Partition_0/MANIFEST-000001 succeeded,manifest_file_number is 1, next_file_number is 3, last_sequence is 0, log_number is 0,prev_log_number is 0,max_column_family is 0
+2021/02/28-17:31:31.737788 70000c073000 [db/version_set.cc:2977] Column family [default] (ID 0), log number is 0
+2021/02/28-17:31:31.742055 70000c073000 [db/db_impl_open.cc:1111] DB pointer 0x7f87a1bd9a00
+2021/02/28-17:32:31.717665 70000c073000 [db/db_impl_write.cc:1127] [default] New memtable created with log file: #3. Immutable memtables: 0.
+2021/02/28-17:32:31.719515 70000c502000 (Original Log Time 2021/02/28-17:32:31.718832) [db/db_impl_compaction_flush.cc:1216] Calling FlushMemTableToOutputFile with column family [default], flush slots available 1, compaction slots available 1, flush slots scheduled 1, compaction slots scheduled 0
+2021/02/28-17:32:31.719528 70000c502000 [db/flush_job.cc:264] [default] [JOB 2] Flushing memtable with next log file: 3
+2021/02/28-17:32:31.720108 70000c502000 EVENT_LOG_v1 {"time_micros": 1614504751719756, "job": 2, "event": "flush_started", "num_memtables": 1, "num_entries": 4916, "num_deletes": 1074, "memory_usage": 238520}
+2021/02/28-17:32:31.720126 70000c502000 [db/flush_job.cc:293] [default] [JOB 2] Level-0 flush table #6: started
+2021/02/28-17:32:31.726490 70000c502000 EVENT_LOG_v1 {"time_micros": 1614504751726475, "cf_name": "default", "job": 2, "event": "table_file_creation", "file_number": 6, "file_size": 20061, "table_properties": {"data_size": 19022, "index_size": 211, "filter_size": 0, "raw_key_size": 32831, "raw_average_key_size": 30, "raw_value_size": 0, "raw_average_value_size": 0, "num_data_blocks": 9, "num_entries": 1074, "filter_policy_name": "", "kDeletedKeys": "1074", "kMergeOperands": "0"}}
+2021/02/28-17:32:31.726738 70000c502000 [db/flush_job.cc:324] [default] [JOB 2] Level-0 flush table #6: 20061 bytes OK
+2021/02/28-17:32:31.726942 70000c502000 [db/version_set.cc:2498] Creating manifest 7
+2021/02/28-17:32:31.728579 70000c502000 (Original Log Time 2021/02/28-17:32:31.726756) [db/memtable_list.cc:372] [default] Level-0 commit table #6 started
+2021/02/28-17:32:31.728585 70000c502000 (Original Log Time 2021/02/28-17:32:31.728317) [db/memtable_list.cc:395] [default] Level-0 commit table #6: memtable #1 done
+2021/02/28-17:32:31.728589 70000c502000 (Original Log Time 2021/02/28-17:32:31.728336) EVENT_LOG_v1 {"time_micros": 1614504751728326, "job": 2, "event": "flush_finished", "lsm_state": [1, 0, 0, 0, 0, 0, 0], "immutable_memtables": 0}
+2021/02/28-17:32:31.728593 70000c502000 (Original Log Time 2021/02/28-17:32:31.728553) [db/db_impl_compaction_flush.cc:140] [default] Level summary: files[1 0 0 0 0 0 0] max score 0.25
+2021/02/28-17:32:31.728838 70000c502000 [DEBUG] [db/db_impl_files.cc:316] [JOB 2] Delete /Users/yuwu/svn/realtime_stream_computing_course/course18/state/word-count-example-1-window-count/Partition_0//MANIFEST-000001 type=3 #1 -- OK
+2021/02/28-17:32:32.184810 70000c073000 [db/db_impl.cc:222] Shutdown: canceling all background work
+2021/02/28-17:32:32.185432 70000c073000 [db/db_impl.cc:348] Shutdown complete
