@@ -52,7 +52,7 @@ public class AsyncServerHandler extends
     final private ExecutorService timeoutExecutor = new BackPressureExecutor(
             "timeout", 1, 8, 8, 1024, 1);
     final private ExecutorService responseExecutor = new BackPressureExecutor(
-            "response", 1, 4, 1024, 1024, 1);
+            "response", 1, 8, 8, 1024, 1);
 
     private final IBlockingMap<String, RequestItem> blockingMap = new BlockingMap<>(1024, 1);
 
