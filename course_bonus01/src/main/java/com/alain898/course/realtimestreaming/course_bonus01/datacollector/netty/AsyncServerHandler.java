@@ -75,8 +75,8 @@ public class AsyncServerHandler extends
             RequestItem requestItem = blockingMap.remove(eventId);
             if (requestItem != null) {
                 try {
-                    sendResponse(requestItem.ctx, REQUEST_TIMEOUT, RestHelper.genResponseString(
-                            REQUEST_TIMEOUT.code(), REQUEST_TIMEOUT.toString()));
+                    sendResponse(requestItem.ctx, OK, RestHelper.genResponseString(
+                            OK.code(), OK.toString()));
                 } finally {
                     requestItem.ref.release();
                 }
