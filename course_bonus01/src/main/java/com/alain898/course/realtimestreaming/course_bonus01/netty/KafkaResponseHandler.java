@@ -1,4 +1,4 @@
-package com.alain898.course.realtimestreaming.course_bonus01.datacollector.netty;
+package com.alain898.course.realtimestreaming.course_bonus01.netty;
 
 import com.alain898.course.realtimestreaming.common.concurrency.BackPressureExecutor;
 import com.alain898.course.realtimestreaming.common.kafka.KafkaReader;
