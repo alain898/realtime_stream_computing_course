@@ -62,7 +62,7 @@ public class AsyncServerHandler extends
     private final KafkaResponseHandler kafkaReader = new KafkaResponseHandler(
             zookeeperConnect, responseTopic, groupId, 2, responseExecutor) {
         @Override
-        Void process(byte[] body) {
+        public Void process(byte[] body) {
             String jsonString = new String(body, Charsets.UTF_8);
             JSONObject e = JSON.parseObject(jsonString);
 

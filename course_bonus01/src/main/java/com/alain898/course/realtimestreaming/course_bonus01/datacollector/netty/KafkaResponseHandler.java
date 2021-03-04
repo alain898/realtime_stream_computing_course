@@ -76,7 +76,7 @@ public abstract class KafkaResponseHandler {
         }
     }
 
-    abstract Void process(byte[] event);
+    public abstract Void process(byte[] event);
 
     public void start() {
         receivers.forEach(Thread::start);
