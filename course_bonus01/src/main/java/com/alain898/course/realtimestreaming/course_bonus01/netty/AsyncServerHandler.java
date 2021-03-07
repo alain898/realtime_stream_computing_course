@@ -50,7 +50,7 @@ public class AsyncServerHandler extends
     private static final ExecutorService requestExecutor = new BackPressureExecutor(
             "request", 1, 32, 32, 1024, 1);
     private static final ExecutorService timeoutExecutor = new BackPressureExecutor(
-            "timeout", 1, 8, 8, 1024, 1);
+            "timeoutHandler", 1, 8, 8, 1024, 1);
     private static final ExecutorService responseExecutor = new BackPressureExecutor(
             "response", 1, 8, 8, 1024, 1);
 
@@ -78,11 +78,11 @@ public class AsyncServerHandler extends
                 try {
                     sendResponse(requestItem.ctx, OK, RestHelper.genResponse(
                             OK.code(), OK.toString(), e).toJSONString());
+                    logger.info(String.format("KafkaResponseHandler, remove eventId[%s], blockingMap.size[%d]",
+                            eventId, blockingMap.size()));
                 } finally {
                     requestItem.ref.release();
                 }
-                logger.info(String.format("KafkaResponseHandler, remove eventId[%s], blockingMap.size[%d]",
-                        eventId, blockingMap.size()));
             } else {
                 logger.info(String.format("KafkaResponseHandler, do nothing, blockingMap.size[%d]",
                         blockingMap.size()));
@@ -167,22 +167,22 @@ public class AsyncServerHandler extends
         // 当请求已经发送到kafka后，就启动一个超时任务，
         // 如果到时候超时设置的时间到了，但是请求对应的响应还没有来，就当超时返回。
         CompletableFuture<Void> timeoutFuture = TimeoutHandler.timeoutAfter(10000, TimeUnit.MILLISECONDS);
-        timeoutFuture.thenAcceptAsync(v -> this.timeout(eventId), timeoutExecutor);
+        timeoutFuture.thenAcceptAsync(v -> this.timeoutHandler(eventId), timeoutExecutor);
     }
 
-    private void timeout(String eventId) {
+    private void timeoutHandler(String eventId) {
         RequestItem requestItem = blockingMap.remove(eventId);
         if (requestItem != null) {
             try {
                 sendResponse(requestItem.ctx, REQUEST_TIMEOUT, RestHelper.genResponseString(
                         REQUEST_TIMEOUT.code(), REQUEST_TIMEOUT.toString()));
+                logger.info(String.format("timeoutHandler, remove eventId[%s], blockingMap.size[%d]",
+                        eventId, blockingMap.size()));
             } finally {
                 requestItem.ref.release();
             }
-            logger.info(String.format("timeout handler, remove eventId[%s], blockingMap.size[%d]",
-                    eventId, blockingMap.size()));
         } else {
-            logger.info(String.format("timeout handler, do nothing, blockingMap.size[%d]",
+            logger.info(String.format("timeoutHandler, do nothing, blockingMap.size[%d]",
                     blockingMap.size()));
         }
     }
