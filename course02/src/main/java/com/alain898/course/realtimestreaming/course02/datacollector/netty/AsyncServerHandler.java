@@ -129,14 +129,14 @@ public class AsyncServerHandler extends
         final RefController refController = new RefController(ctx, req);
         refController.retain();
         CompletableFuture
-                .supplyAsync(() -> this.decode(ctx, req), this.decoderExecutor)
-                .thenApplyAsync(e -> this.doExtractCleanTransform(ctx, req, e), this.ectExecutor)
-                .thenApplyAsync(e -> this.send(ctx, req, e), this.senderExecutor)
+                .supplyAsync(() -> this.decode(ctx, req), decoderExecutor)
+                .thenApplyAsync(e -> this.doExtractCleanTransform(ctx, req, e), ectExecutor)
+                .thenApplyAsync(e -> this.send(ctx, req, e), senderExecutor)
                 .thenAccept(v -> refController.release())
                 .exceptionally(e -> {
                     try {
                         logger.error("exception caught", e);
-                        if (RequestException.class.isInstance(e.getCause())) {
+                        if (e.getCause() instanceof RequestException) {
                             RequestException re = (RequestException) e.getCause();
                             sendResponse(ctx, HttpResponseStatus.valueOf(re.getCode()), re.getResponse());
                         } else {
