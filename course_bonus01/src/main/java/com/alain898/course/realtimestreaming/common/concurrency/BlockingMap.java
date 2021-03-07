@@ -36,4 +36,9 @@ public class BlockingMap<K, V> implements IBlockingMap<K, V> {
         this.map.clear();
     }
 
+    @Override
+    public int size() {
+        return this.map.size();
+    }
+
 }

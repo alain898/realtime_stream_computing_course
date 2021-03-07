@@ -6,4 +6,6 @@ public interface IBlockingMap<K, V> {
     void put(K key, V value) throws InterruptedException;
 
     void clear();
+
+    int size();
 }

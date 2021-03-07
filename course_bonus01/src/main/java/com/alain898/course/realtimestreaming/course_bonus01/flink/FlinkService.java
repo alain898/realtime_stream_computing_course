@@ -39,7 +39,8 @@ public class FlinkService {
                 .map(new MapFunction<JSONObject, String>() {
                     @Override
                     public String map(JSONObject value) throws Exception {
-                        value.put("result", "ok");
+                        value.put("result", "world");
+                        value.put("response_timestamp", System.currentTimeMillis());
                         return JSONObject.toJSONString(value);
                     }
                 });
@@ -69,8 +70,7 @@ public class FlinkService {
 
     private static FlinkKafkaProducer010<String> createKafkaProducer() {
         Properties properties = new Properties();
-        properties.setProperty("kafka.sink.brokers", "localhost:2181");
-        properties.setProperty("kafka.sink.topic", "localhost:9092");
+        properties.setProperty("bootstrap.servers", "localhost:9092");
 
         return new FlinkKafkaProducer010<>("response",
                 new SimpleStringSchema(), properties);

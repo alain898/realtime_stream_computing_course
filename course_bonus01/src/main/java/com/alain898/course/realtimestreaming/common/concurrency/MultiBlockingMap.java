@@ -59,4 +59,9 @@ public class MultiBlockingMap<K, V> implements IBlockingMap<K, V> {
         maps.forEach(BlockingMap::clear);
     }
 
+    @Override
+    public int size() {
+        return maps.stream().mapToInt(BlockingMap::size).sum();
+    }
+
 }

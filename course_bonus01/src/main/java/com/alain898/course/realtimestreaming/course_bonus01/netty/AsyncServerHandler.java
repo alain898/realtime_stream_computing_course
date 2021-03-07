@@ -37,29 +37,29 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
  */
 public class AsyncServerHandler extends
         SimpleChannelInboundHandler<HttpRequest> {
-    private static final Logger logger = LoggerFactory.getLogger(NettyDataCollector.class);
+    private static final Logger logger = LoggerFactory.getLogger(NettyRequestReceiver.class);
 
-    private final String EVENT_ID_TAG = "EVENT_ID_TAG";
+    private static final String EVENT_ID_TAG = "EVENT_ID_TAG";
 
-    private final String kafkaBroker = "127.0.0.1:9092";
-    private final String requestTopic = "request";
-    private final KafkaWriter kafkaWriter = new KafkaWriter(kafkaBroker);
+    private static final String kafkaBroker = "127.0.0.1:9092";
+    private static final String requestTopic = "request";
+    private static final KafkaWriter kafkaWriter = new KafkaWriter(kafkaBroker);
 
-    final private ExecutorService httpDecoderExecutor = new BackPressureExecutor(
+    private static final ExecutorService httpDecoderExecutor = new BackPressureExecutor(
             "decoder", 1, 4, 4, 1024, 1);
-    final private ExecutorService requestExecutor = new BackPressureExecutor(
+    private static final ExecutorService requestExecutor = new BackPressureExecutor(
             "request", 1, 32, 32, 1024, 1);
-    final private ExecutorService timeoutExecutor = new BackPressureExecutor(
+    private static final ExecutorService timeoutExecutor = new BackPressureExecutor(
             "timeout", 1, 8, 8, 1024, 1);
-    final private ExecutorService responseExecutor = new BackPressureExecutor(
+    private static final ExecutorService responseExecutor = new BackPressureExecutor(
             "response", 1, 8, 8, 1024, 1);
 
-    private final IBlockingMap<String, RequestItem> blockingMap = new BlockingMap<>(1024, 1);
+    private static final IBlockingMap<String, RequestItem> blockingMap = new BlockingMap<>(1024, 1);
 
-    private final String zookeeperConnect = "127.0.0.1:2181";
-    private final String responseTopic = "response";
-    private final String groupId = "http_response";
-    private final KafkaResponseHandler kafkaReader = new KafkaResponseHandler(
+    private static final String zookeeperConnect = "127.0.0.1:2181";
+    private static final String responseTopic = "response";
+    private static final String groupId = "http_response";
+    private static final KafkaResponseHandler kafkaReader = new KafkaResponseHandler(
             zookeeperConnect, responseTopic, groupId, 2, responseExecutor) {
         @Override
         public Void process(byte[] body) {
@@ -71,21 +71,28 @@ public class AsyncServerHandler extends
                 logger.warn(String.format("invalid response, event[%s]", String.valueOf(e)));
                 return null;
             }
+            logger.info(String.format("KafkaResponseHandler received eventId[%s]", eventId));
 
             RequestItem requestItem = blockingMap.remove(eventId);
             if (requestItem != null) {
                 try {
-                    sendResponse(requestItem.ctx, OK, RestHelper.genResponseString(
-                            OK.code(), OK.toString()));
+                    sendResponse(requestItem.ctx, OK, RestHelper.genResponse(
+                            OK.code(), OK.toString(), e).toJSONString());
                 } finally {
                     requestItem.ref.release();
                 }
+                logger.info(String.format("KafkaResponseHandler, remove eventId[%s], blockingMap.size[%d]",
+                        eventId, blockingMap.size()));
+            } else {
+                logger.info(String.format("KafkaResponseHandler, do nothing, blockingMap.size[%d]",
+                        blockingMap.size()));
             }
+
             return null;
         }
     };
 
-    {
+    static {
         kafkaReader.start();
     }
 
@@ -116,7 +123,9 @@ public class AsyncServerHandler extends
 
         byte[] body = readRequestBodyAsString((HttpContent) req);
         String jsonString = new String(body, Charsets.UTF_8);
-        return JSON.parseObject(jsonString);
+        JSONObject request = JSON.parseObject(jsonString);
+        request.put("request_timestamp", System.currentTimeMillis());
+        return request;
     }
 
     private void sendRequestToKafka(ChannelHandlerContext ctx, HttpRequest req,
@@ -136,6 +145,7 @@ public class AsyncServerHandler extends
         // 等到之后从kafka里读出响应后，再到blockingMap里找到之前的请求上下文和相关信息，从而返回客户端。
         RequestItem requestItem = new RequestItem(ctx, req, event, ref);
         try {
+            logger.info(String.format("put into blockingMap, eventId[%s]", eventId));
             blockingMap.put(eventId, requestItem);
         } catch (InterruptedException e) {
             logger.warn("InterruptedException caught");
@@ -157,7 +167,7 @@ public class AsyncServerHandler extends
         // 当请求已经发送到kafka后，就启动一个超时任务，
         // 如果到时候超时设置的时间到了，但是请求对应的响应还没有来，就当超时返回。
         CompletableFuture<Void> timeoutFuture = TimeoutHandler.timeoutAfter(10000, TimeUnit.MILLISECONDS);
-        timeoutFuture.thenAcceptAsync(v -> this.timeout(eventId), this.timeoutExecutor);
+        timeoutFuture.thenAcceptAsync(v -> this.timeout(eventId), timeoutExecutor);
     }
 
     private void timeout(String eventId) {
@@ -169,6 +179,11 @@ public class AsyncServerHandler extends
             } finally {
                 requestItem.ref.release();
             }
+            logger.info(String.format("timeout handler, remove eventId[%s], blockingMap.size[%d]",
+                    eventId, blockingMap.size()));
+        } else {
+            logger.info(String.format("timeout handler, do nothing, blockingMap.size[%d]",
+                    blockingMap.size()));
         }
     }
 
@@ -214,8 +229,8 @@ public class AsyncServerHandler extends
         final RefController refController = new RefController(ctx, req);
         refController.retain();
         CompletableFuture
-                .supplyAsync(() -> this.httpDecode(ctx, req), this.httpDecoderExecutor)
-                .thenAcceptAsync(e -> this.sendRequestToKafka(ctx, req, e, refController), this.requestExecutor)
+                .supplyAsync(() -> this.httpDecode(ctx, req), httpDecoderExecutor)
+                .thenAcceptAsync(e -> this.sendRequestToKafka(ctx, req, e, refController), requestExecutor)
                 .exceptionally(e -> {
                     try {
                         logger.error("exception caught", e);

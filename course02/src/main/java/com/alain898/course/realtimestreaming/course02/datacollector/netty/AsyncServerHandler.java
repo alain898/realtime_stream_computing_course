@@ -35,9 +35,9 @@ public class AsyncServerHandler extends
         SimpleChannelInboundHandler<HttpRequest> {
     private static final Logger logger = LoggerFactory.getLogger(NettyDataCollector.class);
 
-    private final String kafkaBroker = "127.0.0.1:9092";
-    private final String topic = "collector_event";
-    private final KafkaWriter kafkaWriter = new KafkaWriterMock(kafkaBroker);
+    private static final String kafkaBroker = "127.0.0.1:9092";
+    private static final String topic = "collector_event";
+    private static final KafkaWriter kafkaWriter = new KafkaWriterMock(kafkaBroker);
 
 
     // step1: 对消息进行解码
@@ -98,9 +98,9 @@ public class AsyncServerHandler extends
         return null;
     }
 
-    final private Executor decoderExecutor = ExecutorHelper.createExecutor(2, "decoder");
-    final private Executor ectExecutor = ExecutorHelper.createExecutor(8, "ect");
-    final private Executor senderExecutor = ExecutorHelper.createExecutor(2, "sender");
+    private static final Executor decoderExecutor = ExecutorHelper.createExecutor(2, "decoder");
+    private static final Executor ectExecutor = ExecutorHelper.createExecutor(8, "ect");
+    private static final Executor senderExecutor = ExecutorHelper.createExecutor(2, "sender");
 
     private static class RefController {
         private final ChannelHandlerContext ctx;

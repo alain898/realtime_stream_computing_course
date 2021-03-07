@@ -13,11 +13,11 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by alain on 18/5/7.
  */
-public class NettyDataCollector {
-    private static final Logger logger = LoggerFactory.getLogger(NettyDataCollector.class);
+public class NettyRequestReceiver {
+    private static final Logger logger = LoggerFactory.getLogger(NettyRequestReceiver.class);
 
     public static void main(String[] args) {
-        final int port = 8081;
+        final int port = 7071;
         final EventLoopGroup bossGroup = new NioEventLoopGroup(0,
                 ExecutorHelper.threadNameThreadFactory("bossGroup"));
         final EventLoopGroup workerGroup = new NioEventLoopGroup(0,
@@ -30,11 +30,11 @@ public class NettyDataCollector {
                     .option(ChannelOption.SO_BACKLOG, 1024);
 
             final ChannelFuture f = bootstrap.bind(port).sync();
-            logger.info(String.format("NettyDataCollector: running on port[%d]", port));
+            logger.info(String.format("NettyRequestReceiver: running on port[%d]", port));
 
             f.channel().closeFuture().sync();
         } catch (final InterruptedException e) {
-            logger.error("NettyDataCollector: an error occurred while running", e);
+            logger.error("NettyRequestReceiver: an error occurred while running", e);
         } finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();

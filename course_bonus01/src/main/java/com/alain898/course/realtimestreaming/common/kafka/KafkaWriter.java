@@ -24,7 +24,7 @@ public class KafkaWriter {
         //1, which means that the producer gets an acknowledgement after the leader replica has received the data. This option provides better durability as the client waits until the server acknowledges the request as successful (must messages that were written to the now-dead leader but not yet replicated will be lost).
         //-1, which means that the producer gets an acknowledgement after all in-sync replicas have received the data. This option provides the best durability, we guarantee that no messages will be lost as long as at least one in sync replica remains.
         DEFAULT_KAFKA_PROPERTIES.put("request.required.acks", "1");
-        DEFAULT_KAFKA_PROPERTIES.put("partitioner.class", "com.alain898.book.realtimestreaming.common.kafka.WriterPartitioner");
+        DEFAULT_KAFKA_PROPERTIES.put("partitioner.class", "com.alain898.course.realtimestreaming.common.kafka.WriterPartitioner");
         DEFAULT_KAFKA_PROPERTIES.put("key.serializer.class", "kafka.serializer.StringEncoder");
 //        DEFAULT_KAFKA_PROPERTIES.put("producer.type", "async");
 //        DEFAULT_KAFKA_PROPERTIES.put("batch.num.messages", "100");
