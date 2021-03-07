@@ -30,5 +30,7 @@ bin/kafka-topics.sh --create --zookeeper localhost:2181 --topic response --parti
 
 ## 发送http请求
 
+```
 curl http://localhost:7071/event -X POST -d '{"request":"hello"}'
+```
 
