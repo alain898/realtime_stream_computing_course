@@ -63,8 +63,9 @@ public class JdbcWriter extends RichSinkFunction<CountedEvent> {
     @Override
     public void invoke(CountedEvent value, Context context) throws Exception {
         try {
+            // 这里使用[minTimestamp / slideMS, minTimestamp / slideMS + slideNumberInWindow]作为记录的时间区间。
             long start = value.minTimestamp / slideMS;
-            long end = value.maxTimestamp / slideMS + slideNumberInWindow;
+            long end = value.minTimestamp / slideMS + slideNumberInWindow;
             String product = value.product;
             int v_count = value.count;
             String layer = this.layer;

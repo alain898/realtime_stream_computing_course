@@ -71,7 +71,7 @@ public class FastLayer {
                     countedEvent.timestamp = e1.timestamp;
                     countedEvent.count = e1.count + e2.count;
                     countedEvent.minTimestamp = Math.min(e1.minTimestamp, e2.minTimestamp);
-                    countedEvent.maxTimestamp = Math.min(e1.maxTimestamp, e2.maxTimestamp);
+                    countedEvent.maxTimestamp = Math.max(e1.maxTimestamp, e2.maxTimestamp);
                     return countedEvent;
                 });
 
